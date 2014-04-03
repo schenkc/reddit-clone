@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in!(@user)
       flash[:notices] = ["Signed up!"]
-      redirect_to root_url
+      redirect_to subs_url
     else
       flash.now[:notices] = @user.error.full_messages
       render :new

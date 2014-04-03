@@ -7,12 +7,12 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(params[:user][:username],
-    params[:user][:username])
+    params[:user][:password])
 
     if !@user.nil?
       sign_in!(@user)
       flash[:notices] = ["Signed in!"]
-      redirect_to root_url
+      redirect_to subs_url
     else
       flash.now[:notices] = ["Invalid credentials. Please try again."]
       @user = User.new(user_params)

@@ -1,0 +1,14 @@
+<h1><%= @sub.name %></h1>
+Moderated by: <%= User.find(@sub.mod_id).username %>
+<br></br>
+<% @sub.links.each do |link| %>
+  <a href="<%= link.url %>"><%= link.title %></a><br>
+  <%= link.body if link.body %><br>
+<% end %>
+
+<% if current_user.id == @sub.mod_id %>
+
+  <%= button_to "Destroy", sub_url(@sub), method: 'delete' %>
+  <a href="<%= edit_sub_url(@sub) %>">Edit Sub</a>
+
+<% end  %>
