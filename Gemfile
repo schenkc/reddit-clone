@@ -42,6 +42,7 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'shoulda-matchers'
 end
 
 gem 'pry-rails'
@@ -52,6 +53,8 @@ group :development do
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Use unicorn as the app server
 # gem 'unicorn'

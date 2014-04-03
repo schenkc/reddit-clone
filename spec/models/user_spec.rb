@@ -28,14 +28,31 @@ describe User do
 
   end
 
-  context "methods" do
+  it "does not store password" do
+    FactoryGirl.create(:user)
+    expect(User.find_by(:username => "Joe").password).to be_nil
+  end
 
     it "::find_by_credentials" do
       user = FactoryGirl.create(:user)
       expect(User.find_by_credentials("Joe", "foobar")).to eq(user)
     end
 
+    it "#reset_session_token!" do
+      user = FactoryGirl.create(:user)
+      session_token = user.session_token
+      user.reset_session_token!
+      expect(user.session_token).to_not eq(session_token)
+    end
 
-  end
+    context "associations" do
+
+      it { should have_many(:links) }
+
+      it { should have_many(:subs) }
+
+    end
+
+
 
 end

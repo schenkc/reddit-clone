@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403131448) do
+ActiveRecord::Schema.define(version: 20140403183205) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "links", force: true do |t|
+    t.string   "title",        null: false
+    t.string   "url",          null: false
+    t.text     "body"
+    t.integer  "submitter_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "links", ["submitter_id"], name: "index_links_on_submitter_id", using: :btree
+  add_index "links", ["title"], name: "index_links_on_title", using: :btree
+
+  create_table "subs", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "mod_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subs", ["mod_id"], name: "index_subs_on_mod_id", using: :btree
+  add_index "subs", ["name"], name: "index_subs_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",        null: false
@@ -21,8 +46,8 @@ ActiveRecord::Schema.define(version: 20140403131448) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["password_digest"], name: "index_users_on_password_digest"
-  add_index "users", ["session_token"], name: "index_users_on_session_token"
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["password_digest"], name: "index_users_on_password_digest", using: :btree
+  add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
