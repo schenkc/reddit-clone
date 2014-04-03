@@ -19,6 +19,8 @@ describe Sub do
 
     it { should have_many(:links) }
 
+    it { should have_many(:link_connections) }
+
 
   end
 

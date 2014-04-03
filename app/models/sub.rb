@@ -10,6 +10,14 @@ class Sub < ActiveRecord::Base
     primary_key: :id
   )
 
-   has_many :links
+  has_many(
+    :link_connections,
+    class_name: "LinkSub",
+    foreign_key: :sub_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
+
+  has_many :links, through: :link_connections, source: :link
 
 end

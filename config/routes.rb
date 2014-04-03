@@ -2,6 +2,7 @@ Redditclone::Application.routes.draw do
   root to: 'sessions#new'
   resources :users, only: [:new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
+  resources :subs
 
 
   # The priority is based upon order of creation: first created -> highest priority.
